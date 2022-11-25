@@ -20,7 +20,7 @@ const App = () => {
   const handleAddNumber = (num) => {
     setCurrentNumber(prev => `${prev === '0' ? '' : prev}${num}`)
   }
-
+// Soma
   const handleSumNumbers = () => {
 
     if(firstNumber === '0'){
@@ -34,7 +34,7 @@ const App = () => {
     }
 
   }
-
+// Subtracao
   const handleMinusNumbers = () => {
 
     if(firstNumber === '0'){
@@ -43,6 +43,36 @@ const App = () => {
         setOperation('-')
     }else {
       const sum = Number(firstNumber) - Number(currentNumber);
+      setCurrentNumber(String(sum))
+      setOperation('')
+    }
+
+  }
+  // Divisao
+  const handleDivisionNumbers = () => {
+
+    if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0')
+        setOperation('/')
+    }else {
+      const sum = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(sum))
+      setOperation('')
+    }
+
+  }
+
+  // Multiplicao
+
+  const handleMultiplicationNumbers = () => {
+
+    if(firstNumber === '0'){
+        setFirstNumber(String(currentNumber));
+        setCurrentNumber('0')
+        setOperation('*')
+    }else {
+      const sum = Number(firstNumber) * Number(currentNumber);
       setCurrentNumber(String(sum))
       setOperation('')
     }
@@ -59,6 +89,12 @@ const App = () => {
           case '-':
             handleMinusNumbers();
             break;
+          case '/':
+            handleDivisionNumbers();
+            break;
+          case '*':
+            handleMultiplicationNumbers();
+            break;
           default: 
             break;
         }
@@ -71,10 +107,10 @@ const App = () => {
       <Content>
         <Input value={currentNumber}/>
         <Row>
-          <Button label="x"/>
-          <Button label="/"/>
-          <Button label="c" onClick={handleOnClear}/>
-          <Button label="."/>
+          <Button label="x" onClick={handleMultiplicationNumbers}/>
+          <Button label="/" onClick={handleDivisionNumbers}/>
+          <Button label="CE" onClick={handleOnClear}/>
+          <Button label="." onClick={()=> handleAddNumber('.')}/>
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')}/>
